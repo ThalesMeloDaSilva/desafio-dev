@@ -20,7 +20,7 @@ public class FinancialTransactionsControllerTest {
 
     @Test
     @DisplayName("Upload deve retornar OK para um arquivo válido")
-    public void uploadDhouldReturnOKForValidFile() {
+    public void uploadShouldReturnOKForValidFile() {
         //given
         MultipartFile file = mock(MultipartFile.class);
 
@@ -34,7 +34,7 @@ public class FinancialTransactionsControllerTest {
 
     @Test
     @DisplayName("Upload deve retornar BAD_REQUEST para um arquivo inválido")
-    public void uploadDhouldReturnBadRequestForInvalidFile() {
+    public void uploadShouldReturnBadRequestForInvalidFile() {
         //given
         MultipartFile file = mock(MultipartFile.class);
 
