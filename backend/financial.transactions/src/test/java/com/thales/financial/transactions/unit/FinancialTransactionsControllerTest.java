@@ -2,6 +2,7 @@ package com.thales.financial.transactions.unit;
 
 
 import com.thales.financial.transactions.controller.FinancialTransactionsController;
+import com.thales.financial.transactions.exception.InvalidCNABFileException;
 import com.thales.financial.transactions.service.FinancialTransactionsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,18 @@ public class FinancialTransactionsControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
+    @Test
+    @DisplayName("Upload deve retornar BAD_REQUEST para um arquivo inválido")
+    public void uploadDhouldReturnBadRequestForInvalidFile() {
+        //given
+        MultipartFile file = mock(MultipartFile.class);
 
+        //when
+        doThrow(InvalidCNABFileException.class).when(service).batchInsertFromFile(file);
+        ResponseEntity response = controller.upload(file);
+
+        //then
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
 
 }
