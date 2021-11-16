@@ -19,7 +19,7 @@ public class FinancialTransactionsController {
 
     @PostMapping("/upload")
     public ResponseEntity upload(MultipartFile file) {
-
+        service.batchInsertFromFile(file);
         return ResponseEntity.ok().build();
     }
 
@@ -28,7 +28,7 @@ public class FinancialTransactionsController {
                                                  int page,
                                          @RequestParam(value = "size", required = false, defaultValue = "10")
                                                  int size) {
-        return null;
+        return service.getFinancialTransactions(page, size);
     }
 
 }
