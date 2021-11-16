@@ -1,5 +1,6 @@
 package com.thales.financial.transactions.controller;
 
+import com.thales.financial.transactions.exception.InvalidCNABFileException;
 import com.thales.financial.transactions.service.FinancialTransactionsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,11 @@ public class FinancialTransactionsController {
 
     @PostMapping("/upload")
     public ResponseEntity upload(MultipartFile file) {
-        service.batchInsertFromFile(file);
+        try {
+            service.batchInsertFromFile(file);
+        } catch (InvalidCNABFileException ex) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok().build();
     }
 
